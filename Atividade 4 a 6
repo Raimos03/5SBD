@@ -1,0 +1,62 @@
+select upper(cliente_nome)
+from cliente 
+
+select initcap(cliente_nome)
+from cliente 
+
+select substr(cliente_nome,0,4)
+from cliente 
+
+select cliente_nome,length(cliente_nome)
+from cliente 
+
+select conta_numero, saldo, round(saldo,0)
+from conta
+
+
+select conta_numero, saldo, trunc(saldo) as SALDO_TRUNCADO
+from conta
+
+select conta_numero, saldo, saldo%1000 as Resto
+from conta
+
+select CURRENT_Date
+
+select CURRENT_Date, CURRENT_Date + 30 as "Data de Vencimento Simulada"
+
+select conta_numero, Current_Date - data_abertura 
+from conta
+
+------------------------
+
+select conta_numero, saldo,'R$'||TO_CHAR (saldo,'999G999G999D99') as saldo_formatado
+from conta order by saldo desc
+
+select *, to_char(data_abertura,'dd/mm/yyyy') as data_abertura_formatada
+from conta;
+
+select conta_numero,saldo, nvl(saldo,0) as SALDO_NULO_0
+from conta ;
+
+select cliente_nome,cidade, nvl(cidade,'sem cidade') as cidade_nulo_0
+from cliente; 
+
+select cliente_nome,cidade,decode(cidade,'Resende','Interior','Niterói','Regiao Metropolitana','Outra Regiao') as cidade_categoria
+from cliente
+
+----------
+
+select cliente_nome , conta_numero , saldo 
+from cliente cl  join conta ct
+on cl.cliente_cod = ct.cliente_cliente_cod
+
+select cliente_nome , agencia_nome, agencia_cidade
+from cliente cl  join conta ct
+on cl.cliente_cod = ct.cliente_cliente_cod left join
+agencia ag on ag.agencia_cod = ct.agencia_agencia_cod
+
+
+select agencia_cod , agencia_nome, agencia_cidade
+from agencia ag 
+left join conta ct on ag.agencia_cod = ct.cliente_cliente_cod 
+left join cliente cl on cl.cliente_cod = ct.cliente_cliente_cod
