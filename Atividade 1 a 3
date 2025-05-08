@@ -1,0 +1,47 @@
+select * from cliente;
+
+select cliente_nome, cidade from cliente;
+
+select conta_numero, saldo from conta;
+
+-------
+
+select cliente_nome from cliente
+where cidade ='Macaé';
+
+select cliente_cod as codigo, cliente_nome as cliente_nome
+from cliente where cliente_cod BETWEEN 5 and 15;
+
+select cliente_nome, cidade
+from cliente 
+where cidade in ('Niterói', 'Volta Redonda','Itaboraí');
+
+select cliente_nome from cliente 
+where clientE_nome like ('F%');
+
+select cliente_nome, cliente_nome || ' mora em' || cidade as LOGRADOURO
+from cliente;
+
+---------------
+
+select  agencia_cod as cod, agencia_nome as nome, agencia_cidade as cidade, fundos as saldo
+from agencia
+where fundos > 9000 order by saldo desc;
+
+
+select cliente_nome as nome, cidade 
+from cliente 
+where (cidade = 'Nova Iguaçu' or cliente_nome like '%Silva%'); 
+
+
+select conta_numero, round(saldo,0)
+from conta ;
+
+
+select upper(cliente_nome),cidade
+from cliente;
+
+
+select cliente_nome, cidade
+from cliente
+where cidade not in ('Teresópolis', 'Campo dos Goytacazes');
