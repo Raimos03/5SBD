@@ -1,0 +1,63 @@
+Atividade 7 a 10
+
+select cliente_nome , conta_numero
+from cliente cl, conta ct
+where cl.cliente_cod = ct.cliente_cliente_cod;
+
+
+select cliente_nome, agencia_cod
+from cliente, agencia;
+
+select cliente_nome as NOME,  INITCAP(agencia_cidade) as Cidade
+from cliente as cl, conta as ct, agencia as ag
+where cl.cliente_cod = ct.cliente_cliente_cod and ag.agencia_cod = ct.agencia_agencia_cod;
+
+--------
+
+select sum(saldo) as total_saldo
+from conta
+
+select max(saldo) as "Saldo Maximo", avg(saldo) as media_saldo
+from conta 
+
+select count(conta_numero) as QTD
+from conta
+
+select  count( distinct(cidade)) 
+from cliente
+
+select conta_numero, nvl(saldo,0) as saldo_nulo_0 
+from conta 
+
+select conta_numero, nvl(saldo,0) as saldo_nulo_0 
+from conta 
+
+-------------------
+
+select cidade , trunc(avg(saldo),3) as media_saldo
+from cliente, conta
+where cliente.cliente_cod = conta.cliente_cliente_cod
+group by cliente.cidade
+
+select cidade, count(*)as qtd_contas
+from cliente cl, conta ct 
+where cl.cliente_cod = ct.cliente_cliente_cod
+group by (cidade)
+having count(*) > 3
+
+-- agrupando por cidade e contando as contas
+select cidade, count(conta_numero) as qtd_contas
+from cliente cl, conta ct 
+where cl.cliente_cod = ct.cliente_cliente_cod
+group by (cidade) 
+
+select agencia_cidade, sum(saldo) as total_saldo
+from agencia ag, conta ct 
+where ag.agencia_cod = ct.agencia_agencia_cod
+group by rollup (agencia_cidade) order by total_saldo desc 
+
+select cidade from cliente 
+where cidade IN ('Duque de Caxias', 'Barra Mansa')
+union
+select agencia_cidade from agencia
+ where agencia_cidade IN ('Niterói', 'Macaé');
